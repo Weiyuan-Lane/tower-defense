@@ -1,0 +1,126 @@
+{
+  "enemies": [
+    {
+      "id": "basic",
+      "name": "Basic Enemy",
+      "description": "A standard enemy with balanced stats",
+      "baseHealth": 100,
+      "baseSpeed": 1.0,
+      "baseReward": 10,
+      "sprite": "basic-enemy.png",
+      "size": {"width": 30, "height": 30}
+    },
+    {
+      "id": "fast",
+      "name": "Fast Enemy",
+      "description": "A quick enemy with low health",
+      "baseHealth": 60,
+      "baseSpeed": 1.8,
+      "baseReward": 15,
+      "sprite": "fast-enemy.png",
+      "size": {"width": 25, "height": 25}
+    },
+    {
+      "id": "armored",
+      "name": "Armored Enemy",
+      "description": "A slow enemy with high health",
+      "baseHealth": 250,
+      "baseSpeed": 0.7,
+      "baseReward": 20,
+      "sprite": "armored-enemy.png",
+      "size": {"width": 35, "height": 35}
+    },
+    {
+      "id": "flying",
+      "name": "Flying Enemy",
+      "description": "A flying enemy that can take shortcuts",
+      "baseHealth": 80,
+      "baseSpeed": 1.3,
+      "baseReward": 25,
+      "sprite": "flying-enemy.png",
+      "size": {"width": 30, "height": 30},
+      "flying": true
+    },
+    {
+      "id": "healing",
+      "name": "Healing Enemy",
+      "description": "An enemy that can heal nearby enemies",
+      "baseHealth": 120,
+      "baseSpeed": 0.9,
+      "baseReward": 30,
+      "sprite": "healing-enemy.png",
+      "size": {"width": 30, "height": 30},
+      "specialAbility": {
+        "type": "heal",
+        "radius": 100,
+        "power": 5,
+        "interval": 3.0
+      }
+    },
+    {
+      "id": "splitting",
+      "name": "Splitting Enemy",
+      "description": "An enemy that splits into smaller enemies when killed",
+      "baseHealth": 150,
+      "baseSpeed": 0.8,
+      "baseReward": 35,
+      "sprite": "splitting-enemy.png",
+      "size": {"width": 40, "height": 40},
+      "specialAbility": {
+        "type": "split",
+        "childType": "basic",
+        "childCount": 2
+      }
+    },
+    {
+      "id": "boss1",
+      "name": "Forest Guardian",
+      "description": "A powerful boss enemy for the forest map",
+      "baseHealth": 1000,
+      "baseSpeed": 0.6,
+      "baseReward": 100,
+      "sprite": "boss1-enemy.png",
+      "size": {"width": 60, "height": 60},
+      "isBoss": true,
+      "specialAbility": {
+        "type": "summon",
+        "enemyType": "basic",
+        "count": 3,
+        "interval": 5.0
+      }
+    },
+    {
+      "id": "boss2",
+      "name": "Desert Colossus",
+      "description": "A powerful boss enemy for the desert map",
+      "baseHealth": 1500,
+      "baseSpeed": 0.5,
+      "baseReward": 150,
+      "sprite": "boss2-enemy.png",
+      "size": {"width": 70, "height": 70},
+      "isBoss": true,
+      "specialAbility": {
+        "type": "aura",
+        "effect": "speed",
+        "radius": 150,
+        "power": 1.5
+      }
+    },
+    {
+      "id": "boss3",
+      "name": "Mountain Titan",
+      "description": "A powerful boss enemy for the mountain map",
+      "baseHealth": 2000,
+      "baseSpeed": 0.4,
+      "baseReward": 200,
+      "sprite": "boss3-enemy.png",
+      "size": {"width": 80, "height": 80},
+      "isBoss": true,
+      "specialAbility": {
+        "type": "shield",
+        "duration": 5.0,
+        "cooldown": 15.0
+      }
+    }
+  ]
+}
