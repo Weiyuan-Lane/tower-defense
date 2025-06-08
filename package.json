@@ -6,7 +6,11 @@
   "scripts": {
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "publish": "npm run github-pages:cleanup && npm run github-pages:prodbuild && npm run github-pages:publish && npm run github-pages:cleanup",
+    "github-pages:prodbuild": "npm run build && cp ./github-pages/.nojekyll dist/.nojekyll",
+    "github-pages:publish": "subpath-as-branch -p dist -b gh-pages",
+    "github-pages:cleanup": "rm -rf dist"
   },
   "keywords": [
     "game",
@@ -28,6 +32,7 @@
     "style-loader": "^3.3.3",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1"
+    "webpack-dev-server": "^4.15.1",
+    "subpath-as-branch": "^1.0.0"
   }
 }
