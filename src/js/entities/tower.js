@@ -67,12 +67,6 @@ export class Tower {
     body.drawRect(-10, -15, 20, 30);
     body.endFill();
     this.container.addChild(body);
-
-    // In a real implementation, this would use sprites
-    // const towerTexture = PIXI.Texture.from(`assets/images/${config.sprite}`);
-    // const towerSprite = new PIXI.Sprite(towerTexture);
-    // towerSprite.anchor.set(0.5);
-    // this.container.addChild(towerSprite);
   }
 
   createRangeIndicator() {
@@ -111,8 +105,15 @@ export class Tower {
       event.stopPropagation();
     });
 
-    this.container.on('pointerover', () => {
-      this.rangeIndicator.visible = true;
+    this.container.on('pointermove', (event) => {
+      const localPos = event.data.getLocalPosition(this.container);
+      console.log('Pointer over tower at:', localPos);
+      if (localPos.x > -TOWER_SIZE && localPos.x < TOWER_SIZE &&
+          localPos.y > -TOWER_SIZE && localPos.y < TOWER_SIZE) {
+        this.rangeIndicator.visible = true;
+      } else {
+        this.rangeIndicator.visible = false;
+      }
     });
 
     this.container.on('pointerout', () => {
@@ -209,6 +210,7 @@ export class Tower {
     if (gameplayScene) {
       gameplayScene.addChild(projectile.sprite);
       gameplay.projectiles.push(projectile);
+      gameplay.game.audioManager.playSfx('towerShoot');
     }
   }
 

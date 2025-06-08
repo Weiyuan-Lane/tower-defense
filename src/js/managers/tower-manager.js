@@ -196,9 +196,6 @@ export class TowerManager {
 
     // Add tower to game container
     this.gameplay.gameContainer.addChild(tower.container);
-
-    // Play sound effect
-    this.gameplay.game.audioManager.playSfx('towerPlace');
   }
 
   upgradeTower(tower) {

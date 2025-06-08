@@ -20,6 +20,7 @@ export class WaveManager {
     this.currentWave++;
     this.gameplay.wave = this.currentWave;
     this.waveInProgress = true;
+    this.gameplay.game.audioManager.playMusic('gameplay');
     this.preparationTimeLeft = 0;
 
     // Check if we've reached the maximum number of waves
@@ -102,6 +103,7 @@ export class WaveManager {
 
   waveComplete() {
     this.waveInProgress = false;
+    this.gameplay.game.audioManager.stopMusic();
     this.startPreparation();
   }
 

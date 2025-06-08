@@ -360,6 +360,8 @@ export class Gameplay {
 
     if (this.lives <= 0) {
       this.gameOver = true;
+      this.game.audioManager.stopMusic();
+      this.game.audioManager.playSfx('gameOver');
       this.endGame();
     }
   }

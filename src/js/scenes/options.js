@@ -210,6 +210,8 @@ export class Options {
     const savedSettings = localStorage.getItem('tdGameSettings');
     if (savedSettings) {
       this.settings = JSON.parse(savedSettings);
+      this.game.audioManager.setMusicVolume(this.settings.musicVolume);
+      this.game.audioManager.setSfxVolume(this.settings.sfxVolume);
     }
   }
 

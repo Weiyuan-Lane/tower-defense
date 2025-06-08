@@ -33,7 +33,7 @@
       "baseCost": 200,
       "baseDamage": 5,
       "baseRange": 120,
-      "baseSpeed": 2.0,
+      "baseSpeed": 10.0,
       "projectileType": "single",
       "projectileEffect": null,
       "projectileSpeed": 600,
