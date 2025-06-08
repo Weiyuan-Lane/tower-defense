@@ -182,7 +182,11 @@ export class TowerManager {
 
     // Check if player has enough money
     if (!this.gameplay.spendMoney(towerConfig.baseCost)) {
-      console.log('Not enough money');
+      this.gameplay.game.showToast("Not enough money!", {
+        duration: 3000,
+        position: 'top',
+        fontSize: 20
+      });
       return;
     }
 
