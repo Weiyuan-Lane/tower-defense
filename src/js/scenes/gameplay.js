@@ -116,7 +116,7 @@ export class Gameplay {
     // Background
     const bg = new PIXI.Graphics();
     bg.beginFill(0x000000, 0.7);
-    bg.drawRoundedRect(-250, -40, 500, 80, 10);
+    bg.drawRoundedRect(-210, -40, 420, 80, 10);
     bg.endFill();
     panel.addChild(bg);
 
@@ -136,7 +136,68 @@ export class Gameplay {
       xPos += buttonWidth + spacing;
     });
 
+    // Add cancel button to unselect tower
+    const cancelButton = this.createCancelButton();
+    cancelButton.position.set(totalWidth / 2 + spacing * 2 + buttonWidth / 2, 0);
+    panel.addChild(cancelButton);
+
     this.uiContainer.addChild(panel);
+    this.cancelButton = cancelButton; // Store reference for showing/hiding
+  }
+
+  createCancelButton() {
+    const button = new PIXI.Container();
+    button.interactive = true;
+    button.cursor = 'pointer';
+    button.visible = false; // Initially hidden
+
+    // Button background
+    const bg = new PIXI.Graphics();
+    bg.beginFill(0x333333);
+    bg.lineStyle(2, 0xFF5555);
+    bg.drawRoundedRect(-30, -30, 60, 60, 5);
+    bg.endFill();
+    button.addChild(bg);
+
+    // X icon
+    const icon = new PIXI.Graphics();
+    icon.lineStyle(4, 0xFF5555);
+    icon.moveTo(-15, -15);
+    icon.lineTo(15, 15);
+    icon.moveTo(15, -15);
+    icon.lineTo(-15, 15);
+    button.addChild(icon);
+
+    // Label
+    const labelText = new PIXI.Text('Cancel', {
+      fontFamily: 'Arial',
+      fontSize: 12,
+      fill: 0xffffff
+    });
+    labelText.anchor.set(0.5);
+    labelText.position.set(0, 20);
+    button.addChild(labelText);
+
+    // Button events
+    button.on('pointerdown', () => {
+      this.towerManager.selectTowerType(null);
+      this.game.showToast("Tower selection canceled", {
+        duration: 1500,
+        background: 0x555555,
+        position: 'top'
+      });
+      this.hideCancelButton();
+    });
+
+    button.on('pointerover', () => {
+      bg.tint = 0x666666;
+    });
+
+    button.on('pointerout', () => {
+      bg.tint = 0xffffff;
+    });
+
+    return button;
   }
 
   createTowerButton(tower) {
@@ -172,6 +233,7 @@ export class Gameplay {
     // Button events
     button.on('pointerdown', () => {
       this.towerManager.selectTowerType(tower.id);
+      this.showCancelButton();
     });
 
     button.on('pointerover', () => {
@@ -183,6 +245,14 @@ export class Gameplay {
     });
 
     return button;
+  }
+
+  showCancelButton() {
+    this.cancelButton.visible = true;
+  }
+
+  hideCancelButton() {
+    this.cancelButton.visible = false;
   }
 
   createWaveControlPanel() {
