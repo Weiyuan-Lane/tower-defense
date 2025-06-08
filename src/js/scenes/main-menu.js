@@ -26,8 +26,19 @@ export class MainMenu {
     });
     title.resolution = 2;
     title.anchor.set(0.5);
-    title.position.set(this.game.width / 2, 100);
+    title.position.set(this.game.width / 2, 20);
     this.container.addChild(title);
+
+    const bannerContainer = new PIXI.Container();
+    bannerContainer.position.set(this.game.width / 2, this.game.height / 2 - 90);
+    const bannerImageSize = 300;
+    const titleTexture = PIXI.Texture.from(`assets/images/banner.png`);
+    const banner = new PIXI.Sprite(titleTexture);
+    banner.anchor.set(0.5);
+    banner.width = bannerImageSize;
+    banner.height = bannerImageSize;
+    bannerContainer.addChild(banner);
+    this.container.addChild(bannerContainer);
 
     // Create menu buttons
     this.createMenuButtons();
@@ -43,7 +54,7 @@ export class MainMenu {
     const buttonContainer = new PIXI.Container();
     buttonContainer.position.set(this.game.width / 2, this.game.height / 2);
 
-    let yOffset = 0;
+    let yOffset = 80;
     const buttonHeight = 60;
     const buttonWidth = 200;
     const buttonSpacing = 20;

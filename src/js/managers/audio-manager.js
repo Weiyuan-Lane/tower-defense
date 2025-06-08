@@ -131,6 +131,6 @@ export class AudioManager {
   }
 
   setSfxVolume(volume) {
-    this.sfxVolume = volume;
+    this.sfxVolume = volume/3;
   }
 }

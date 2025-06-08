@@ -40,20 +40,6 @@
       "sprite": "machine-gun-tower.png"
     },
     {
-      "id": "splash",
-      "name": "Splash",
-      "description": "Deals area damage to multiple enemies",
-      "baseCost": 300,
-      "baseDamage": 15,
-      "baseRange": 150,
-      "baseSpeed": 0.8,
-      "projectileType": "area",
-      "splashRadius": 80,
-      "projectileEffect": null,
-      "projectileSpeed": 400,
-      "sprite": "splash-tower.png"
-    },
-    {
       "id": "frost",
       "name": "Frost",
       "description": "Slows down enemies with ice projectiles",
