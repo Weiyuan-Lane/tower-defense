@@ -77,8 +77,9 @@ export class Projectile {
       const dx = this.target.x - this.x;
       const dy = this.target.y - this.y;
       const distance = Math.sqrt(dx * dx + dy * dy);
+      const hitbox = this.target.size.width / 2 * 1.3; // Adjust hitbox size as needed
 
-      if (distance < 10) {
+      if (distance <= hitbox) {
         this.hit();
       }
     }
@@ -109,11 +110,11 @@ export class Projectile {
         const dx = enemy.x - this.x;
         const dy = enemy.y - this.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
-        
+
         if (distance <= this.splashRadius) {
           // Deal damage to enemy
           enemy.takeDamage(this.damage);
-          
+
           // Apply effect if any
           if (this.effect && this.effectPower && this.effectDuration) {
             enemy.applyStatusEffect(this.effect, this.effectPower, this.effectDuration);
@@ -147,7 +148,7 @@ export class Projectile {
       const fadeOut = () => {
         alpha -= 0.05;
         splash.alpha = alpha;
-        
+
         if (alpha <= 0) {
           gameContainer.removeChild(splash);
         } else {

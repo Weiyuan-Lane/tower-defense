@@ -228,7 +228,7 @@ export class TowerManager {
   update(delta) {
     // Update all towers
     for (const tower of this.towers) {
-      tower.update(delta, this.gameplay.enemyManager.enemies);
+      tower.update(delta, this.gameplay.enemyManager.enemies, this.gameplay);
     }
   }
 }

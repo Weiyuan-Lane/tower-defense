@@ -180,7 +180,7 @@ export class Tower {
     return bestTarget;
   }
 
-  attack(target) {
+  attack(target, gameplay) {
     // Create projectile
     const projectile = new Projectile({
       x: this.x,
@@ -201,10 +201,11 @@ export class Tower {
     const gameplayScene = this.container.parent;
     if (gameplayScene) {
       gameplayScene.addChild(projectile.sprite);
+      gameplay.projectiles.push(projectile);
     }
   }
 
-  update(delta, enemies) {
+  update(delta, enemies, gameplay) {
     // Update cooldown
     if (this.cooldown > 0) {
       this.cooldown -= delta / 60; // delta is in frames, convert to seconds
@@ -220,7 +221,7 @@ export class Tower {
     if (!this.target) return;
 
     // Attack target
-    this.attack(this.target);
+    this.attack(this.target, gameplay);
 
     // Reset cooldown
     this.cooldown = 1 / this.speed;

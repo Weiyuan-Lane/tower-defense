@@ -16,6 +16,7 @@ export class Gameplay {
     this.wave = 0;
     this.gameOver = false;
     this.paused = false;
+    this.projectiles = [];
   }
 
   init() {
@@ -368,7 +369,7 @@ export class Gameplay {
     gameOverText.position.set(this.game.width / 2, this.game.height / 2 - 50);
     this.uiContainer.addChild(gameOverText);
 
-    const waveReachedText = new PIXI.Text(`You reached wave ${this.wave}`, {
+    const waveReachedText = new PIXI.Text(`You reached Wave ${this.wave}`, {
       fontFamily: 'Arial',
       fontSize: 24,
       fill: 0xffffff,
@@ -405,6 +406,18 @@ export class Gameplay {
     this.towerManager.update(delta);
     this.enemyManager.update(delta);
     this.waveManager.update(delta);
+
+    // Update projectiles
+    for (let i = this.projectiles.length - 1; i >= 0; i--) {
+      const projectile = this.projectiles[i];
+      projectile.update(delta);
+
+      // Remove inactive projectiles
+      if (!projectile.active) {
+        this.gameContainer.removeChild(projectile.sprite);
+        this.projectiles.splice(i, 1);
+      }
+    }
 
     // Update UI
     this.updateUI();
