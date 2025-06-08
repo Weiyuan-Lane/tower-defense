@@ -41,13 +41,8 @@ export class MapSelection {
   }
 
   loadMaps() {
-    // In a real implementation, this would load from a config file
-    // For now, we'll create some sample maps
-    this.maps = [
-      { id: 'map1', name: 'Forest Path', difficulty: 'Easy', preview: null },
-      { id: 'map2', name: 'Desert Canyon', difficulty: 'Medium', preview: null },
-      { id: 'map3', name: 'Mountain Pass', difficulty: 'Hard', preview: null }
-    ];
+    const mapsConfig = require('../../config/maps.json');
+    this.maps = mapsConfig.maps;
   }
 
   createMapSelectionUI() {
@@ -56,11 +51,12 @@ export class MapSelection {
 
     // Create map preview
     const previewSize = 300;
-    const preview = new PIXI.Graphics();
-    preview.beginFill(0x333333);
-    preview.drawRect(-previewSize / 2, -previewSize / 2, previewSize, previewSize);
-    preview.endFill();
-    mapContainer.addChild(preview);
+    const titleTexture = PIXI.Texture.from(`assets/images/${this.maps[this.selectedMapIndex].titleImage}`);
+    const previewSprite = new PIXI.Sprite(titleTexture);
+    previewSprite.anchor.set(0.5);
+    previewSprite.width = previewSize;
+    previewSprite.height = previewSize;
+    mapContainer.addChild(previewSprite);
 
     // Map name and difficulty
     const mapInfo = new PIXI.Container();
@@ -107,7 +103,7 @@ export class MapSelection {
     // Store references for updating
     this.mapName = mapName;
     this.mapDifficulty = mapDifficulty;
-    this.mapPreview = preview;
+    this.mapPreviewSprite = previewSprite;
   }
 
   createArrowButton(x, y, symbol, onClick) {
@@ -189,8 +185,8 @@ export class MapSelection {
     this.mapName.text = selectedMap.name;
     this.mapDifficulty.text = `Difficulty: ${selectedMap.difficulty}`;
 
-    // Update preview (in a real implementation, this would load the map preview image)
-    this.mapPreview.tint = [0x3333aa, 0xaa3333, 0x33aa33][this.selectedMapIndex];
+    const texture = PIXI.Texture.from(`assets/images/${selectedMap.titleImage}`);
+    this.mapPreviewSprite.texture = texture;
   }
 
   update(delta) {
