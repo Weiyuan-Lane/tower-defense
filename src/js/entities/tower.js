@@ -1,8 +1,9 @@
 import * as PIXI from 'pixi.js';
 import { Projectile } from './projectile';
 
+const TOWER_SIZE = 20; // Size of the tower base in pixels
 export class Tower {
-  constructor(config, x, y) {
+  constructor(config, gameplay, x, y) {
     this.type = config.id;
     this.name = config.name;
     this.x = x;
@@ -49,14 +50,14 @@ export class Tower {
     this.createLevelText();
 
     // Make tower interactive
-    this.setupInteraction();
+    this.setupInteraction(gameplay);
   }
 
   createTowerGraphics() {
     // Base
     const base = new PIXI.Graphics();
     base.beginFill(0x666666);
-    base.drawCircle(0, 0, 20);
+    base.drawCircle(0, 0, TOWER_SIZE);
     base.endFill();
     this.container.addChild(base);
 
@@ -94,12 +95,20 @@ export class Tower {
     this.container.addChild(this.levelText);
   }
 
-  setupInteraction() {
+  setupInteraction(gameplay) {
     this.container.interactive = true;
     this.container.cursor = 'pointer';
 
-    this.container.on('pointerdown', () => {
-      this.showUpgradeMenu();
+    this.container.on('pointerdown', (event) => {
+      const localPos = event.data.getLocalPosition(this.container);
+
+      if (localPos.x > -TOWER_SIZE && localPos.x < TOWER_SIZE &&
+          localPos.y > -TOWER_SIZE && localPos.y < TOWER_SIZE) {
+        this.showUpgradeMenu(gameplay);
+      }
+
+      // Stop event propagation to prevent closing the menu immediately
+      event.stopPropagation();
     });
 
     this.container.on('pointerover', () => {
@@ -111,12 +120,10 @@ export class Tower {
     });
   }
 
-  showUpgradeMenu() {
-    // In a real implementation, this would show an upgrade menu
-    // For now, we'll just upgrade the tower directly
-    const gameplayScene = this.container.parent.parent;
-    if (gameplayScene && gameplayScene.towerManager) {
-      gameplayScene.towerManager.upgradeTower(this);
+  showUpgradeMenu(gameplay) {
+    // Show upgrade menu at tower's position
+    if (gameplay && gameplay.createTowerUpgradeMenu) {
+      gameplay.createTowerUpgradeMenu(this, this.x, this.y);
     }
   }
 

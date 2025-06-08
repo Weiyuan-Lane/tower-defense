@@ -6,7 +6,7 @@
       "description": "A winding path through a dense forest",
       "difficulty": "Easy",
       "lives": 20,
-      "startingMoney": 300,
+      "startingMoney": 1500,
       "width": 800,
       "height": 600,
       "backgroundImage": "forest-background.png",

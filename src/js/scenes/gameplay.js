@@ -435,4 +435,131 @@ export class Gameplay {
     // Update UI
     this.updateUI();
   }
+
+  createTowerUpgradeMenu(tower, x, y) {
+    // Remove any existing upgrade menu
+    this.closeTowerUpgradeMenu();
+
+    // Create a new container for the upgrade menu
+    this.upgradeMenu = new PIXI.Container();
+    this.upgradeMenu.position.set(x, y - 80); // Position above the tower
+    this.upgradeMenu.zIndex = 100; // Ensure it appears above other elements
+
+    // Background panel
+    const bg = new PIXI.Graphics();
+    bg.beginFill(0x000000, 0.8);
+    bg.drawRoundedRect(-75, -60, 150, 120, 10);
+    bg.endFill();
+    this.upgradeMenu.addChild(bg);
+
+    // Tower info
+    const nameText = new PIXI.Text(tower.name, {
+      fontFamily: 'Arial',
+      fontSize: 14,
+      fill: 0xffffff
+    });
+    nameText.anchor.set(0.5, 0);
+    nameText.position.set(0, -50);
+    this.upgradeMenu.addChild(nameText);
+
+    const levelText = new PIXI.Text(`Level: ${tower.level}`, {
+      fontFamily: 'Arial',
+      fontSize: 12,
+      fill: 0xffffff
+    });
+    levelText.anchor.set(0.5, 0);
+    levelText.position.set(0, -30);
+    this.upgradeMenu.addChild(levelText);
+
+    // Calculate upgrade cost
+    const towerConfig = this.towerManager.towersConfig.find(t => t.id === tower.type);
+    const upgradeFormulas = require('../../config/game-settings.json').towerSettings.upgradeFormulas;
+    const upgradeCost = Math.floor(eval(upgradeFormulas.cost.formula
+      .replace('baseCost', towerConfig.baseCost)
+      .replace('level', tower.level)));
+
+    // Upgrade button
+    const upgradeButton = this.createButton(120, 30, `Upgrade ($${upgradeCost})`, () => {
+      if (this.towerManager.upgradeTower(tower)) {
+        this.game.showToast(`Tower upgraded to level ${tower.level}!`, {
+          duration: 2000,
+          background: 0x4CAF50,
+          position: 'top'
+        });
+
+        const upgradeCost = Math.floor(eval(upgradeFormulas.cost.formula
+          .replace('baseCost', towerConfig.baseCost)
+          .replace('level', tower.level)));
+        levelText.text = `Level: ${tower.level}`;
+        upgradeButton.text = `Upgrade ($${upgradeCost})`;
+
+      } else {
+        this.game.showToast("Not enough money for upgrade", {
+          duration: 2000,
+          background: 0xFF5555,
+          position: 'top'
+        });
+      }
+    });
+    upgradeButton.position.set(0, 0);
+    this.upgradeMenu.addChild(upgradeButton);
+
+    // Demolish button
+    const demolishButton = this.createButton(120, 30, "Demolish", () => {
+      // Calculate refund amount (50% of total investment)
+      let refundAmount = Math.floor(towerConfig.baseCost * 0.5);
+      for (let i = 1; i < tower.level; i++) {
+        const levelCost = Math.floor(eval(upgradeFormulas.cost.formula
+          .replace('baseCost', towerConfig.baseCost)
+          .replace('level', i)));
+        refundAmount += Math.floor(levelCost * 0.5);
+      }
+
+      // Remove tower
+      this.towerManager.removeTower(tower);
+
+      // Add refund
+      this.addMoney(refundAmount);
+
+      this.game.showToast(`Tower demolished! +$${refundAmount}`, {
+        duration: 2000,
+        background: 0x4CAF50,
+        position: 'top'
+      });
+
+      this.closeTowerUpgradeMenu();
+    });
+    demolishButton.position.set(0, 40);
+    this.upgradeMenu.addChild(demolishButton);
+
+    // Add to UI container
+    this.uiContainer.addChild(this.upgradeMenu);
+
+    // Add click outside listener
+    this.clickOutsideHandler = (event) => {
+      const point = event.data.global;
+      const bounds = this.upgradeMenu.getBounds();
+
+      if (point.x < bounds.x || point.x > bounds.x + bounds.width ||
+          point.y < bounds.y || point.y > bounds.y + bounds.height) {
+        this.closeTowerUpgradeMenu();
+      }
+    };
+
+    this.game.app.stage.interactive = true;
+    this.game.app.stage.on('pointerdown', this.clickOutsideHandler);
+  }
+
+  closeTowerUpgradeMenu() {
+    if (this.upgradeMenu) {
+      this.uiContainer.removeChild(this.upgradeMenu);
+      this.upgradeMenu = null;
+
+      // Remove click outside listener
+      if (this.clickOutsideHandler) {
+        this.game.app.stage.off('pointerdown', this.clickOutsideHandler);
+        this.clickOutsideHandler = null;
+      }
+    }
+  }
 }

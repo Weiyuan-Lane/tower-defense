@@ -191,7 +191,7 @@ export class TowerManager {
     }
 
     // Create tower
-    const tower = new Tower(towerConfig, x, y);
+    const tower = new Tower(towerConfig, this.gameplay, x, y);
     this.towers.push(tower);
 
     // Add tower to game container
@@ -223,6 +223,19 @@ export class TowerManager {
     this.gameplay.game.audioManager.playSfx('upgrade');
 
     return true;
+  }
+
+  removeTower(tower) {
+    // Remove from game container
+    if (tower.container.parent) {
+      tower.container.parent.removeChild(tower.container);
+    }
+
+    // Remove from towers array
+    const index = this.towers.indexOf(tower);
+    if (index !== -1) {
+      this.towers.splice(index, 1);
+    }
   }
 
   update(delta) {
