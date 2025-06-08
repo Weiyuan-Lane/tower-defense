@@ -217,7 +217,7 @@ export class Gameplay {
     // Tower icon (placeholder)
     const icon = new PIXI.Graphics();
     icon.beginFill(0x4CAF50);
-    icon.drawCircle(0, 0, 15);
+    icon.drawCircle(0, 0, 10);
     icon.endFill();
     button.addChild(icon);
 
@@ -225,11 +225,24 @@ export class Gameplay {
     const costText = new PIXI.Text(`$${tower.baseCost}`, {
       fontFamily: 'Arial',
       fontSize: 12,
-      fill: 0xffffff
+      fill: 0xedc001
     });
     costText.anchor.set(0.5);
     costText.position.set(0, 20);
     button.addChild(costText);
+
+    // Add tower title above the button
+    const titleText = new PIXI.Text(tower.name, {
+      fontFamily: 'Arial',
+      fontSize: 8,
+      fill: 0xffffff,
+      align: 'center',
+      wordWrap: true,
+      wordWrapWidth: 80
+    });
+    titleText.anchor.set(0.5, 1);
+    titleText.position.set(0, -15);
+    button.addChild(titleText);
 
     // Button events
     button.on('pointerdown', () => {

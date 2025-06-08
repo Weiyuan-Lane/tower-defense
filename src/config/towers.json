@@ -2,7 +2,7 @@
   "towers": [
     {
       "id": "basic",
-      "name": "Basic Tower",
+      "name": "Basic",
       "description": "A simple tower with single target projectiles",
       "baseCost": 100,
       "baseDamage": 10,
@@ -15,7 +15,7 @@
     },
     {
       "id": "sniper",
-      "name": "Sniper Tower",
+      "name": "Sniper",
       "description": "Long range tower with high damage but slow attack speed",
       "baseCost": 250,
       "baseDamage": 30,
@@ -28,7 +28,7 @@
     },
     {
       "id": "machine-gun",
-      "name": "Machine Gun Tower",
+      "name": "Machine Gun",
       "description": "Fast firing tower with low damage",
       "baseCost": 200,
       "baseDamage": 5,
@@ -41,7 +41,7 @@
     },
     {
       "id": "splash",
-      "name": "Splash Tower",
+      "name": "Splash",
       "description": "Deals area damage to multiple enemies",
       "baseCost": 300,
       "baseDamage": 15,
@@ -55,7 +55,7 @@
     },
     {
       "id": "frost",
-      "name": "Frost Tower",
+      "name": "Frost",
       "description": "Slows down enemies with ice projectiles",
       "baseCost": 250,
       "baseDamage": 8,
@@ -70,7 +70,7 @@
     },
     {
       "id": "stun",
-      "name": "Stun Tower",
+      "name": "Stun",
       "description": "Temporarily stuns enemies",
       "baseCost": 350,
       "baseDamage": 12,
@@ -85,7 +85,7 @@
     },
     {
       "id": "poison",
-      "name": "Poison Tower",
+      "name": "Poison",
       "description": "Poisons enemies, dealing damage over time",
       "baseCost": 300,
       "baseDamage": 7,
@@ -100,7 +100,7 @@
     },
     {
       "id": "fire",
-      "name": "Fire Tower",
+      "name": "Fire",
       "description": "Sets enemies on fire, dealing damage over time",
       "baseCost": 350,
       "baseDamage": 9,
@@ -115,7 +115,7 @@
     },
     {
       "id": "confusion",
-      "name": "Confusion Tower",
+      "name": "Confusion",
       "description": "Confuses enemies, making them walk backwards",
       "baseCost": 400,
       "baseDamage": 5,
@@ -130,7 +130,7 @@
     },
     {
       "id": "artillery",
-      "name": "Artillery Tower",
+      "name": "Artillery",
       "description": "Long range area damage tower",
       "baseCost": 450,
       "baseDamage": 25,
