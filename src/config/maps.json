@@ -1,0 +1,211 @@
+{
+  "maps": [
+    {
+      "id": "forest",
+      "name": "Forest Path",
+      "description": "A winding path through a dense forest",
+      "difficulty": "Easy",
+      "lives": 20,
+      "startingMoney": 300,
+      "width": 800,
+      "height": 600,
+      "backgroundImage": "forest-background.png",
+      "path": [
+        {"x": 0, "y": 300},
+        {"x": 100, "y": 300},
+        {"x": 200, "y": 200},
+        {"x": 300, "y": 200},
+        {"x": 400, "y": 300},
+        {"x": 500, "y": 400},
+        {"x": 600, "y": 400},
+        {"x": 700, "y": 300},
+        {"x": 800, "y": 300}
+      ],
+      "buildableAreas": [
+        {"x": 0, "y": 0, "width": 800, "height": 150},
+        {"x": 0, "y": 450, "width": 800, "height": 150},
+        {"x": 0, "y": 150, "width": 50, "height": 300},
+        {"x": 750, "y": 150, "width": 50, "height": 300},
+        {"x": 250, "y": 250, "width": 100, "height": 100},
+        {"x": 450, "y": 250, "width": 100, "height": 100}
+      ],
+      "waves": [
+        {
+          "wave": 1,
+          "enemies": [
+            {"type": "basic", "count": 10, "interval": 1.5}
+          ]
+        },
+        {
+          "wave": 2,
+          "enemies": [
+            {"type": "basic", "count": 15, "interval": 1.2}
+          ]
+        },
+        {
+          "wave": 3,
+          "enemies": [
+            {"type": "basic", "count": 10, "interval": 1.0},
+            {"type": "fast", "count": 5, "interval": 2.0}
+          ]
+        },
+        {
+          "wave": 4,
+          "enemies": [
+            {"type": "basic", "count": 15, "interval": 1.0},
+            {"type": "fast", "count": 8, "interval": 1.5}
+          ]
+        },
+        {
+          "wave": 5,
+          "enemies": [
+            {"type": "basic", "count": 15, "interval": 0.8},
+            {"type": "fast", "count": 10, "interval": 1.2},
+            {"type": "boss1", "count": 1, "interval": 0}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "desert",
+      "name": "Desert Canyon",
+      "description": "A narrow canyon through a scorching desert",
+      "difficulty": "Medium",
+      "lives": 15,
+      "startingMoney": 250,
+      "width": 800,
+      "height": 600,
+      "backgroundImage": "desert-background.png",
+      "path": [
+        {"x": 0, "y": 150},
+        {"x": 200, "y": 150},
+        {"x": 200, "y": 450},
+        {"x": 400, "y": 450},
+        {"x": 400, "y": 150},
+        {"x": 600, "y": 150},
+        {"x": 600, "y": 450},
+        {"x": 800, "y": 450}
+      ],
+      "buildableAreas": [
+        {"x": 0, "y": 0, "width": 800, "height": 100},
+        {"x": 0, "y": 500, "width": 800, "height": 100},
+        {"x": 50, "y": 200, "width": 100, "height": 200},
+        {"x": 250, "y": 200, "width": 100, "height": 200},
+        {"x": 450, "y": 200, "width": 100, "height": 200},
+        {"x": 650, "y": 200, "width": 100, "height": 200}
+      ],
+      "waves": [
+        {
+          "wave": 1,
+          "enemies": [
+            {"type": "basic", "count": 15, "interval": 1.2}
+          ]
+        },
+        {
+          "wave": 2,
+          "enemies": [
+            {"type": "basic", "count": 10, "interval": 1.0},
+            {"type": "fast", "count": 10, "interval": 1.5}
+          ]
+        },
+        {
+          "wave": 3,
+          "enemies": [
+            {"type": "basic", "count": 15, "interval": 0.8},
+            {"type": "fast", "count": 15, "interval": 1.2}
+          ]
+        },
+        {
+          "wave": 4,
+          "enemies": [
+            {"type": "basic", "count": 20, "interval": 0.7},
+            {"type": "fast", "count": 15, "interval": 1.0},
+            {"type": "armored", "count": 5, "interval": 2.0}
+          ]
+        },
+        {
+          "wave": 5,
+          "enemies": [
+            {"type": "basic", "count": 20, "interval": 0.6},
+            {"type": "fast", "count": 15, "interval": 0.8},
+            {"type": "armored", "count": 10, "interval": 1.5},
+            {"type": "boss2", "count": 1, "interval": 0}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mountain",
+      "name": "Mountain Pass",
+      "description": "A treacherous path through snowy mountains",
+      "difficulty": "Hard",
+      "lives": 10,
+      "startingMoney": 200,
+      "width": 800,
+      "height": 600,
+      "backgroundImage": "mountain-background.png",
+      "path": [
+        {"x": 0, "y": 100},
+        {"x": 100, "y": 100},
+        {"x": 100, "y": 300},
+        {"x": 300, "y": 300},
+        {"x": 300, "y": 500},
+        {"x": 500, "y": 500},
+        {"x": 500, "y": 300},
+        {"x": 700, "y": 300},
+        {"x": 700, "y": 100},
+        {"x": 800, "y": 100}
+      ],
+      "buildableAreas": [
+        {"x": 150, "y": 150, "width": 100, "height": 100},
+        {"x": 350, "y": 350, "width": 100, "height": 100},
+        {"x": 550, "y": 150, "width": 100, "height": 100},
+        {"x": 150, "y": 350, "width": 100, "height": 100},
+        {"x": 350, "y": 150, "width": 100, "height": 100},
+        {"x": 550, "y": 350, "width": 100, "height": 100}
+      ],
+      "waves": [
+        {
+          "wave": 1,
+          "enemies": [
+            {"type": "basic", "count": 20, "interval": 1.0}
+          ]
+        },
+        {
+          "wave": 2,
+          "enemies": [
+            {"type": "basic", "count": 15, "interval": 0.8},
+            {"type": "fast", "count": 15, "interval": 1.2}
+          ]
+        },
+        {
+          "wave": 3,
+          "enemies": [
+            {"type": "basic", "count": 20, "interval": 0.7},
+            {"type": "fast", "count": 15, "interval": 1.0},
+            {"type": "armored", "count": 10, "interval": 1.5}
+          ]
+        },
+        {
+          "wave": 4,
+          "enemies": [
+            {"type": "basic", "count": 25, "interval": 0.6},
+            {"type": "fast", "count": 20, "interval": 0.8},
+            {"type": "armored", "count": 15, "interval": 1.2},
+            {"type": "flying", "count": 5, "interval": 2.0}
+          ]
+        },
+        {
+          "wave": 5,
+          "enemies": [
+            {"type": "basic", "count": 25, "interval": 0.5},
+            {"type": "fast", "count": 20, "interval": 0.7},
+            {"type": "armored", "count": 15, "interval": 1.0},
+            {"type": "flying", "count": 10, "interval": 1.5},
+            {"type": "boss3", "count": 1, "interval": 0}
+          ]
+        }
+      ]
+    }
+  ]
+}
