@@ -8,6 +8,7 @@ export class Options {
       musicVolume: 0.7,
       sfxVolume: 0.8
     };
+    this.loadSettings();
   }
 
   init() {
@@ -117,11 +118,10 @@ export class Options {
     slider.cursor = 'pointer';
 
     const updateSlider = (event) => {
-      const bounds = slider.getBounds();
       const localPos = event.data.getLocalPosition(slider.parent);
 
       // Calculate value (0 to 1)
-      let value = (localPos.x - (bounds.x - width / 2)) / width;
+      let value = (localPos.x + width / 2) / width;
       value = Math.max(0, Math.min(1, value));
 
       // Update fill and handle
